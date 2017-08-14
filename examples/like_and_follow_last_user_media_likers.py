@@ -13,21 +13,15 @@ import argparse
 sys.path.append(os.path.join(sys.path[0], '../'))
 from instabot import Bot
 
-parser = argparse.ArgumentParser(add_help=True)
-parser.add_argument('-u', type=str, help="username")
-parser.add_argument('-p', type=str, help="password")
-parser.add_argument('-proxy', type=str, help="proxy")
-parser.add_argument('users', type=str, nargs='+', help='users')
-args = parser.parse_args()
-
 bot = Bot()
-bot.login(username=args.u, password=args.p,
-          proxy=args.proxy)
+bot.login(username='petrju123456', password='testovaciucet',
+          proxy=None  )
 
-for username in args.users:
+for username in ['pauliegarand']:
     medias = bot.get_user_medias(username, filtration=False)
     if len(medias):
         likers = bot.get_media_likers(medias[0])
         for liker in tqdm(likers):
-            bot.like_user(liker, amount=2)
+            print(bot.like_user(liker, amount=2))
+            print('foooo')
             bot.follow(liker)

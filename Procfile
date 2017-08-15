@@ -1,1 +1,1 @@
-web: python3 examples/like_and_follow_last_user_media_likers.py
+web: python3 main.py

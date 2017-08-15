@@ -12,8 +12,33 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
 
 
-async def do_some_work(x):
-    await os.system('python3 examples/like_and_follow_last_user_media_likers.py')
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(do_some_work(5))
+import threading
+import time
+
+
+class ThreadingExample(object):
+    """ Threading example class
+    The run() method will be started and it will run in the background
+    until the application exits.
+    """
+
+    def __init__(self, interval=1):
+        """ Constructor
+        :type interval: int
+        :param interval: Check interval, in seconds
+        """
+        self.interval = interval
+
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True                            # Daemonize thread
+        thread.start()                                  # Start the execution
+
+    def run(self):
+        """ Method that runs forever """
+        while True:
+            # Do something
+            os.system('python3 examples/like_and_follow_last_user_media_likers.py')
+            time.sleep(5)
+
+example = ThreadingExample()
